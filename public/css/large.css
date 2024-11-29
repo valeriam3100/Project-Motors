@@ -1,7 +1,6 @@
 @media only screen and (min-width: 60em) {
   body {
-    background-image: url("../images/site/checkerboard.jpg");
-    margin: 3% 15%;
+    margin: 3% 10%;
   }
 
   #wrapper {
