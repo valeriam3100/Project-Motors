@@ -1,0 +1,30 @@
+<!--Content Heading-->
+<% if (title) { %>
+    <div id="management-grid" class="base-grid">
+        <h1><%= title %></h1>
+        <!--Displays messages in the view-->
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+          <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+          <%  }) %>
+          </ul>
+          <% } %>
+        <p><a href="/inv/addClassification">Add new classification</a></p>
+        <p><a href="/inv/addInventory">Add new vehicle</a></p>
+        
+        <h2>Manage Inventory</h2>
+        <p>Select a class from the list to see the items in that class.</p>
+
+        <%- classificationSelect %>
+
+
+        <table id="inventoryDisplay"></table>
+
+        <noscript>JavaScript must be enabled to use this page.</noscript>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
+<script src="../../js/inventory.js"></script>

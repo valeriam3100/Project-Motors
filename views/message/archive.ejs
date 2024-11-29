@@ -1,0 +1,20 @@
+<!--Content Heading-->
+<% if (title) { %>
+    <div class="base-grid">
+        <h1><%= title %></h1>
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+          <ul>
+            <li><a href="/message/">Return to inbox</a></li>
+          </ul>
+          <%- table %>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>

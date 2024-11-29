@@ -1,0 +1,22 @@
+<!--Content Heading-->
+<% if (title) { %>
+    <div id="add-classification-grid" class="form-grid">
+        <h1><%= title %></h1>
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+        <form action="/inv/addClassification" method="post">
+                <p>Field is required.</p>
+                <p>Name must be alphabetical character only.</p>
+                <label class="top">Name:<input type="text" name="classification_name" pattern="[a-zA-Z]+" required value="<%= locals.classification_name %>"></label>
+                <input class="submitBtn" type="submit" name="submitf" value="Add Classification">
+        </form>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>

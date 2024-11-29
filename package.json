@@ -1,0 +1,33 @@
+{
+  "name": "cse340",
+  "version": "1.0.0",
+  "description": "Starter project for CSE 340",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "connect-pg-simple": "^8.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.21.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "install": "^0.13.0",
+    "jnpm": "^0.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

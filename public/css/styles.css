@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto:wght@300&family=Rubik&display=swap');
+
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 300%;
+  margin-left: 0.5em;
+}
+
+p, a {
+  font-family: Roboto, Helvetica, sans-serif;
+}
+
+/*Header Styles*/
+#top-header {
+  width: auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  margin: 0 10px;
+  font-size: 150%;
+}
+
+.siteName a, #tools a {
+  text-decoration: none;
+}
+
+#tools {
+  justify-self: end;
+}
+
+.siteName a {
+  color: #2c5184;
+  font-size: 250%;
+  font-weight: bold;
+}
+
+#tools a {
+  color: black;
+}
+
+/*Navigation*/
+#primary-nav ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  background-color: #726f6f;
+  padding: 0;
+  font-size: 150%;
+}
+
+#primary-nav a {
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;
+  background-color: #726f6f;
+  color: white;
+  padding: 15px;
+  width: 100%;
+}
+
+#primary-nav a:hover {
+  background-color: white;
+  color: black;
+}
+
+/*Home Styles*/
+.description {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 180px;
+  left: 15px;
+  top: 15px;
+}
+
+.description p, .description h2 {
+  margin: 3px;
+}
+
+.car-profile .description img {
+  width: 120px;
+}
+
+.car-profile {
+  position: relative;
+}
+
+.car-profile img {
+  width: 100%;
+}
+
+#reviews-position h2 {
+  margin-left: 10px;
+}
+
+.reviews li {
+  margin: 10px 0;
+  margin-left: -15px;
+  font-size: 120%;
+}
+
+/*Upgrade Grid*/
+#upgrades-position h2 {
+  margin-left: 10px;
+}
+
+#upgrade-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.upgrade {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.upgrade img {
+  width: 3.5em;
+}
+
+.img-wrapper {
+  display: flex;
+  background-color: #007BFF;
+  border: solid 1px black;
+  justify-content: center;
+  align-items: center;
+  width: 10em;
+  height: 5em;
+}
+
+/*SQL based, inventory displays*/
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 215.8px));
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#inv-display li {
+  display: flex;
+  flex-direction: column;
+  border: solid 3px #5d8ee1;
+  border-radius: 15px;
+  margin: 5px;
+  align-items: center;
+}
+
+#inv-display li img {
+  border-radius: 12px;
+}
+
+.namePrice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.namePrice hr {
+  width: 100%;
+}
+
+.namePrice a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.7em;
+  color: black;
+  background-color: #5d8ee1;
+  padding: 0.2em;
+  border-radius: 8px;
+  margin: -20px 5px 0 5px;
+}
+
+.namePrice a:hover {
+  background-color: #102542;
+  color: white;
+}
+
+/*SQL based, vehicle details*/
+#details-display {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0 1em;
+  padding: 0;
+}
+
+#details-display img {
+  width: 100%;
+}
+
+.vehicle-details {
+  margin-left: 1em;
+}
+
+.vehicle-details p {
+  padding: 0.5em;
+}
+
+.vehicle-price {
+  font-weight: bold;
+  background-color: #d2d5d8;
+}
+
+.vehicle-color {
+  background-color: #d2d5d8;
+}
+
+.bolder {
+  font-weight: bold;
+}
+
+/*Error Styles*/
+.error-message {
+  margin-left: 15px;
+}
+
+/*Notice (message) Styles*/
+.notice {
+  color: red;
+}
+
+/*Login Styles*/
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem 1rem;
+  border: 1px solid #102542;
+  border-radius: 10px;
+  padding: .5rem 2%;
+}
+
+form label.top, form label.top select {
+  display: block;
+  width: 90%;
+  padding-top: 1rem;
+  color: #102542;
+  font-size: .8rem;
+}
+
+form label.top input, form label.top select, form label.description textarea {
+  -webkit-appearance: none;
+  display: block;
+  font-size: 1rem;
+  border: solid 1px #999;
+  border-radius: 4px;
+  padding: .75rem;
+  color: #555;
+  width: 100%;
+  background-color: rgba(0,0,0,0.1);
+}
+
+form label.description textarea {
+  display: block;
+  padding: .75rem 10px;
+  width: 100%;
+}
+
+form label.description {
+  position: inherit;
+  display: block;
+  width: 90%;
+  padding-top: 1rem;
+  font-size: .8rem;
+}
+
+form input.submitBtn {
+  border: none;
+  background-color: #102542;
+  color: white;
+  border-radius: 1rem;
+  padding: .75rem 1.5rem;
+  margin: 1rem;
+  width: 96%;
+  max-width: 20rem;
+}
+
+form input.submitBtn:hover {
+  background-color: #5d8ee1;
+  color: black;
+}
+
+form label.top input:required, form label.description textarea:required {
+  border-left: rgb(24, 111, 162) solid 6px;
+}
+
+form label.top input:required:valid, form label.description textarea:required:valid{
+  border-left: green solid 6px;
+}
+
+/*Account Management Styles*/
+#account-grid {
+  display: block;
+}
+
+#account-grid p {
+  margin-left: 2.5em;
+}
+
+#account-grid h2, #account-grid h3 {
+  margin-left: 1em;
+}
+
+/*Management Styles*/
+#management-grid {
+  display: block;
+}
+
+#management-grid p, #management-grid select, #management-grid noscript {
+  margin-left: 2.5em;
+}
+
+#management-grid h2 {
+  margin-left: 1em;
+}
+
+#inventoryDisplay {
+  margin-left: 2.5em;
+}
+
+/*Inbox/Archive Styles*/
+#inbox-table {
+  margin-left: 1em;
+  text-align: center;
+}
+
+#inbox-table td, #inbox-table th {
+  padding-left: 1em;
+}
+
+.tableNotice {
+  margin-left: 1em;
+}
+
+/*Message Styles*/
+.message-options {
+  margin-left: 2.5em;
+}
+
+#message-view hr {
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+#message-view a {
+  margin-left: 1em;
+}
+
+#message-view form {
+  display: block;
+  margin: 0;
+  width: auto;
+  border: none;
+  border-radius: 10px;
+  padding: 1em 0 0 1em;
+}
+
+#message-view form input.submitBtn {
+  box-sizing: border-box;
+  padding: .75rem 1.5rem;
+  margin: 0;
+  width: auto;
+  max-width: 20rem;
+}
+
+.forms-flex {
+  display: flex;
+  justify-content: start;
+}
+
+/*Footer Styles*/
+footer {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

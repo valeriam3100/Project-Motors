@@ -1,0 +1,50 @@
+<!--Content Heading-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+
+<!--Displays messages in the view-->
+<%- messages() %>
+
+<!--Message Displays Here-->
+<div id="message-view">
+<%- message %>
+
+    <hr>
+    <a href="/message/">Return to inbox</a>
+    <div class="forms-flex">
+    <form class="messageForm" action="/message/reply" method="post">
+        <input type="hidden" name="message_id" value="<%= locals.message_id %>">
+        <input class="submitBtn" type="submit" name="submitf" value="Reply">
+    </form>
+    <% if (!locals.message_read) { %>
+        <form class="messageForm" action="/message/read" method="post">
+            <input type="hidden" name="message_id" value="<%= locals.message_id %>">
+            <input class="submitBtn" type="submit" name="submitf" value="Mark as Read">
+        </form>
+    <% } else { %>
+        <form class="messageForm" action="/message/unread" method="post">
+            <input type="hidden" name="message_id" value="<%= locals.message_id %>">
+            <input class="submitBtn" type="submit" name="submitf" value="Mark as Unread">
+        </form>
+    <% } %>
+
+    <form class="messageForm" action="/message/archive" method="post">
+        <input type="hidden" name="message_id" value="<%= locals.message_id %>">
+        <input class="submitBtn" type="submit" name="submitf" value="Archive">
+    </form>
+    <form class="messageForm" action="/message/delete" method="post">
+        <input type="hidden" name="message_id" value="<%= locals.message_id %>">
+        <input class="submitBtn" type="submit" name="submitf" value="Delete">
+    </form>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<!--Content Heading-->
+<% if (title) { %>
+    <div id="create-message-grid" class="form-grid">
+        <h1><%= title %></h1>
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+          <p>This is an internal system only. Recipients are limited to the three generic accounts.</p>
+          
+        <form action="/message/createMessage" method="post">
+            <p>All inputs are required.</p>
+            <label class="top">To:
+                <%- options %>
+            </label>
+            <label class="top">Subject:<input type="text" name="message_subject" required value="<%= locals.message_subject %>"></label>
+            <label class="description">Message:<textarea name="message_body" required><%= locals.message_body %></textarea></label>
+            <input type="hidden" name="account_id"<% if(locals.account_id) { %> value="<%= locals.account_id %>"<% } %>>
+            <input class="submitBtn" type="submit" name="submitf" value="Send">
+        </form>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
+

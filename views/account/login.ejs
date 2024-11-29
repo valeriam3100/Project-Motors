@@ -1,0 +1,23 @@
+<!--Content Heading-->
+<% if (title) { %>
+    <div id="login-grid" class="form-grid">
+        <h1><%= title %></h1>
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+        <form action="/account/login" method="post">
+            <label class="top">Email:<input type="email" name="account_email" placeholder="someone@gmail.com" required value="<%= locals.account_email %>"></label>
+            <label class="top">Password:<input type="password" name="account_password" required></label>
+            <p>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character.</p>
+            <input class="submitBtn" type="submit" name="submitf" value="LOGIN">
+            <p>No account? <a href="/account/register">Sign-up</a></p>
+        </form>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
