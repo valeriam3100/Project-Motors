@@ -1,53 +1,82 @@
-// Necessary Resources 
-const express = require("express")
-const router = new express.Router() 
-const accountController = require("../controllers/account-controller")
-const utilities = require("../utilities/")
-const regValidate = require('../utilities/account-validation')
-const baseController = require("../controllers/base-controller")
+// Necessary Resources
+const express = require("express");
+const router = new express.Router();
+const accountController = require("../controllers/account-controller");
+const utilities = require("../utilities/");
+const regValidate = require('../utilities/account-validation');
+
+// Centralized validation rules for easy reuse
+const validationRules = {
+  register: {
+    validation: regValidate.registationRules(),
+    check: regValidate.checkRegData
+  },
+  login: {
+    validation: regValidate.loginRules(),
+    check: regValidate.checkLogData
+  },
+  editAccount: {
+    validation: regValidate.editAccountRules(),
+    check: regValidate.checkEditData
+  },
+  editPassword: {
+    validation: regValidate.editPasswordRules(),
+    check: regValidate.checkEditData
+  }
+};
+
+// Middleware for handling errors
+const handleErrors = utilities.handleErrors;
 
 // Default route for accounts
-router.get(
-  "/",
-  utilities.handleErrors(accountController.buildAccount))
+router.get("/", handleErrors(accountController.buildAccount));
+
 // Route to build login view
-router.get("/login", utilities.handleErrors(accountController.buildLogin))
+router.get("/login", handleErrors(accountController.buildLogin));
+
 // Route to build register view
-router.get("/register", utilities.handleErrors(accountController.buildRegister))
+router.get("/register", handleErrors(accountController.buildRegister));
+
 // Process the registration attempt
 router.post(
-    '/register',
-    regValidate.registationRules(),
-    regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount))
+  '/register',
+  validationRules.register.validation,
+  validationRules.register.check,
+  handleErrors(accountController.registerAccount)
+);
+
 // Process the login attempt
 router.post(
-    "/login",
-    regValidate.loginRules(),
-    regValidate.checkLogData,
-    utilities.handleErrors(accountController.accountLogin)
-  )
+  "/login",
+  validationRules.login.validation,
+  validationRules.login.check,
+  handleErrors(accountController.accountLogin)
+);
+
 // Route to build edit-account view
 router.get(
-    "/edit-account",
-    utilities.checkLogin,
-    utilities.handleErrors(accountController.buildEditAccount)
-  )
-// Process update attempt
+  "/edit-account",
+  utilities.checkLogin,
+  handleErrors(accountController.buildEditAccount)
+);
+
+// Process account update attempt
 router.post(
   "/update",
-  regValidate.editAccountRules(),
-  regValidate.checkEditData,
-  utilities.handleErrors(accountController.updateAccount)
-)
-// Process update password attempt
+  validationRules.editAccount.validation,
+  validationRules.editAccount.check,
+  handleErrors(accountController.updateAccount)
+);
+
+// Process password update attempt
 router.post(
   "/update/password",
-  regValidate.editPasswordRules(),
-  regValidate.checkEditData,
-  utilities.handleErrors(accountController.updatePassword)
-)
+  validationRules.editPassword.validation,
+  validationRules.editPassword.check,
+  handleErrors(accountController.updatePassword)
+);
+
 // Route to logout of account
-router.get("/logout", utilities.handleErrors(accountController.logoutOfAccount))
+router.get("/logout", handleErrors(accountController.logoutOfAccount));
 
 module.exports = router;

@@ -1,84 +1,70 @@
-// Necessary Resources 
-const express = require("express")
-const router = new express.Router() 
-const messageController = require("../controllers/message-controller")
-const messageValidate = require('../utilities/message-validation')
-const utilities = require("../utilities/")
+// Necessary Resources
+const express = require("express");
+const router = new express.Router();
+const messageController = require("../controllers/message-controller");
+const messageValidate = require('../utilities/message-validation');
+const utilities = require("../utilities/");
+
+// Helper function to handle routes with login check and error handling
+const routeWithLoginAndErrorHandling = (method, path, validationRules, controller) => {
+  if (validationRules) {
+    router[method](
+      path,
+      utilities.checkLogin,
+      validationRules.validation,
+      validationRules.check,
+      utilities.handleErrors(controller)
+    );
+  } else {
+    router[method](
+      path,
+      utilities.checkLogin,
+      utilities.handleErrors(controller)
+    );
+  }
+};
 
 // Inbox route
-router.get(
-    "/",
-    utilities.checkLogin,
-    utilities.handleErrors(messageController.buildInbox))
+routeWithLoginAndErrorHandling("get", "/", null, messageController.buildInbox);
 
 // Messages Archive route
-router.get(
-    "/archive",
-    utilities.checkLogin,
-    utilities.handleErrors(messageController.buildArchive))
+routeWithLoginAndErrorHandling("get", "/archive", null, messageController.buildArchive);
 
 // Create message route
-router.get(
-    "/createMessage",
-    utilities.checkLogin,
-    utilities.handleErrors(messageController.buildCreateMessage))
+routeWithLoginAndErrorHandling("get", "/createMessage", null, messageController.buildCreateMessage);
 
 // Process send message request
-router.post(
-    "/createMessage",
-    utilities.checkLogin,
-    messageValidate.messageRules(),
-    messageValidate.checkMessageData,
-    utilities.handleErrors(messageController.createMessage))
-
-// Message archive route
-router.get(
-    "/archive",
-    utilities.checkLogin,
-    utilities.handleErrors(messageController))
+routeWithLoginAndErrorHandling(
+  "post",
+  "/createMessage",
+  { validation: messageValidate.messageRules(), check: messageValidate.checkMessageData },
+  messageController.createMessage
+);
 
 // Route to build message by message id
-router.get(
-    "/detail/:messageId",
-    utilities.checkLogin,
-    utilities.handleErrors(messageController.buildByMessageId));
+routeWithLoginAndErrorHandling("get", "/detail/:messageId", null, messageController.buildByMessageId);
 
 // Route to reply to a message
-router.post(
-    "/reply",
-    utilities.handleErrors(messageController.buildReplyToMessage)
-    )
+routeWithLoginAndErrorHandling("post", "/reply", null, messageController.buildReplyToMessage);
 
 // Process reply message
-router.post(
-    "/replyMessage",
-    messageValidate.messageRules(),
-    messageValidate.checkMessageData,
-    utilities.handleErrors(messageController.createMessage)
-)
+routeWithLoginAndErrorHandling(
+  "post",
+  "/replyMessage",
+  { validation: messageValidate.messageRules(), check: messageValidate.checkMessageData },
+  messageController.createMessage
+);
 
 // Route to mark a message as read
-router.post(
-    "/read",
-    utilities.handleErrors(messageController.markAsRead)
-    )
+routeWithLoginAndErrorHandling("post", "/read", null, messageController.markAsRead);
 
 // Route to mark a message as unread
-router.post(
-    "/unread",
-    utilities.handleErrors(messageController.markAsUnread)
-    )
+routeWithLoginAndErrorHandling("post", "/unread", null, messageController.markAsUnread);
 
 // Route to archive a message
-router.post(
-    "/archive",
-    utilities.handleErrors(messageController.archiveMessage)
-    )
+routeWithLoginAndErrorHandling("post", "/archive", null, messageController.archiveMessage);
 
 // Route to delete a message
-router.post(
-    "/delete",
-    utilities.handleErrors(messageController.deleteMessage)
-    )
+routeWithLoginAndErrorHandling("post", "/delete", null, messageController.deleteMessage);
 
-module.exports = router
+module.exports = router;
